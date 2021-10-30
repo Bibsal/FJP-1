@@ -24,3 +24,22 @@
 // npm install jsdom
 // npm install excel4node
 // npm install pdf-lib
+
+//---------------------------------------------------------------------------------------------------------------
+
+// TO RUN THIS PROGRAM -->>>  node CricinfoExtracter.js --excelFile=Worldcup.csv --dataFolder=worldcup --source=https://www.espncricinfo.com/series/icc-cricket-world-cup-2019-1144415/match-results 
+
+// TU HI NIRANKAR , Let's Start
+
+let minimist = require("minimist");
+let axios = require("axios");
+let jsdom = require("jsdom");
+let excel4node = require("excel4node");
+let pdflib = require("pdf-lib");
+let fs = require("fs");
+let path = require("path");
+
+let args = minimist(process.argv);
+console.log(args.source);
+console.log(args.dataFolder);
+console.log(args.excelFile);
