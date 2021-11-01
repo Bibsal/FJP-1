@@ -40,6 +40,13 @@ let fs = require("fs");
 let path = require("path");
 
 let args = minimist(process.argv);
-console.log(args.source);
-console.log(args.dataFolder);
-console.log(args.excelFile);
+// console.log(args.source);           //This was just to check whether hamara arguments sahi sae print hua ki nahi
+// console.log(args.dataFolder);
+// console.log(args.excelFile);
+
+// browser => url to html (request to response)
+let responseKaPromise = axios.get(args.source);
+responseKaPromise.then(function(response) {          //Yaha response milega html nahi
+    let html = response.data;                  // ab since html us response k data me bhara para hai so yaha hame html mil jaiyega and it'll be assigned to html variable here
+    // console.log(html);    //You can print the html for verification ki axios ne hame source link wala page ka html la kar diya ya nahi
+}) 
