@@ -27,7 +27,7 @@
 
 //---------------------------------------------------------------------------------------------------------------
 
-// TO RUN THIS PROGRAM -->>>  node CricinfoExtracter.js --excelFile=Worldcup.csv --dataFolder=worldcup --source=https://www.espncricinfo.com/series/icc-cricket-world-cup-2019-1144415/match-results 
+// TO RUN THIS PROGRAM -->>>  node CricinfoExtracter.js --excelFile=Worldcup.csv --dataFolder=worldcup --source=https://www.espncricinfo.com/series/icc-cricket-world-cup-2019-1144415/match-results
 
 // TU HI NIRANKAR , Let's Start
 
@@ -46,7 +46,11 @@ let args = minimist(process.argv);
 
 // browser => url to html (browser ne url sae http request banaya jiske badle me server ne html bhaja in http response)(So this http is just a protocol/way to get the data)
 let responseKaPromise = axios.get(args.source);
-responseKaPromise.then(function(response) {          //Yaha response milega html nahi
+responseKaPromise.then(function (response) {          //Yaha response milega html nahi
     let html = response.data;                  // ab since html us response k data me bhara para hai so yaha hame html mil jaiyega and it'll be assigned to html variable here
     // console.log(html);    //You can print the html for verification ki axios ne hame source link wala page ka html la kar diya ya nahi
+
+    let dom = new jsdom.JSDOM(html);       //Creating a dom(Document Object Model)(it is a tree of the html code)(basically makes easy for developers to have direct access over the tags)
+    let document = dom.window.document;    //Now as we've made a dom of the html code, so here we've assigned it to the document variable and with this we can directly access any tag of the html page/code
+    console.log(document.title);           // An example on how we access via the document of the dom(Here we've used the above feature and printed the title of the cricinfo webpage)(It prints --->>> ICC Cricket World Cup - Cricket Schedules, Updates, Results | ESPNcricinfo.com)
 }) 
