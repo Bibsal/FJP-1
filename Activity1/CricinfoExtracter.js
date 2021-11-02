@@ -54,6 +54,26 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
     let document = dom.window.document;               //Now as we've made a dom of the html code, so here we've assigned it to the document variable and with this we can directly access any tag of the html page/code
     // console.log(document.title);                   // An example on how we access via the document of the dom(Here we've used the above feature and printed the title of the cricinfo webpage)(It prints --->>> ICC Cricket World Cup - Cricket Schedules, Updates, Results | ESPNcricinfo.com)
 
-    let matchesKaDivs = document.querySelectorAll("div.match-score-block");          //Now here we've taken all the divs of the matches using querySelectorAll and passing in the arguments as where the code of matches is present (eg here is was in div with calss match-score-block so we passed div.match-score-block)
-    console.log(matchesKaDivs.length);
+    let matchesKaDivs = document.querySelectorAll("div.match-score-block");          // Now here we've taken all the divs of the matches using querySelectorAll and passing in the arguments as where the code of matches is present (eg here is was in div with calss match-score-block so we passed div.match-score-block)
+    // console.log(matchesKaDivs.length);                                               // Here we're just testing by printing the length and checking whether the no of matches are showing in the length or not
+
+    let matches = [];
+
+    for(let i = 0; i < matchesKaDivs.length; i++) {
+        let match = {                     //Creating objects so that we can store our outputs in it (Object in javascript is created inside curly brackets -->> { } )
+            t1: "",                      // t1 -->> team 1   vs   t2 -->> team 2  
+            t2: "",                      // t2 -->> team 2
+            t1s: "",                     // t1s -->> team 1 score
+            t2s: "",                     // t2s -->> team 2 score
+            result: ""                   // result of the match 
+        };
+
+        let resultPrinting = matchesKaDivs[i].querySelector("div.status-text > span");
+        match.result = resultPrinting.textContent;
+
+        
+        matches.push(match);
+
+    }
+    console.log(matches);
 })
