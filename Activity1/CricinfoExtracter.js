@@ -59,7 +59,7 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
 
     let matches = [];
 
-    for(let i = 0; i < matchesKaDivs.length; i++) {
+    for (let i = 0; i < matchesKaDivs.length; i++) {
         let match = {                     //Creating objects so that we can store our outputs in it (Object in javascript is created inside curly brackets -->> { } )
             t1: "",                      // t1 -->> team 1   vs   t2 -->> team 2  
             t2: "",                      // t2 -->> team 2
@@ -68,12 +68,12 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
             result: ""                   // result of the match 
         };
 
-        let resultPrinting = matchesKaDivs[i].querySelector("div.status-text > span");
-        match.result = resultPrinting.textContent;
+        let resultPrinting = matchesKaDivs[i].querySelector("div.status-text > span");       // gone inside the website of cricinfo and inspected where the result is kep and bought it's location here in the argument
+        match.result = resultPrinting.textContent;                                           // and here assigned the text content of the result to the object's data member named result which is in match object(therefore match.result -->> ki match object ke andar ka result) 
 
-        
-        matches.push(match);
+
+        matches.push(match);   // and here pushing the match object to the matches array 
 
     }
-    console.log(matches);
+    console.log(matches);      // now as our data is pushed(i.e currently result is taken and pushed) so we are checking it by printing our matches array 
 })
