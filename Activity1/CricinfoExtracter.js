@@ -46,11 +46,14 @@ let args = minimist(process.argv);
 
 // browser => url to html (browser ne url sae http request banaya jiske badle me server ne html bhaja in http response)(So this http is just a protocol/way to get the data)
 let responseKaPromise = axios.get(args.source);
-responseKaPromise.then(function (response) {          //Yaha response milega html nahi
-    let html = response.data;                  // ab since html us response k data me bhara para hai so yaha hame html mil jaiyega and it'll be assigned to html variable here
-    // console.log(html);    //You can print the html for verification ki axios ne hame source link wala page ka html la kar diya ya nahi
+responseKaPromise.then(function (response) {          //Yaha response milega, html nahi
+    let html = response.data;                         // ab since html us response k data me bhara para hai so yaha hame html mil jaiyega and it'll be assigned to html variable here
+    // console.log(html);                             //You can print the html for verification ki axios ne hame source link wala page ka html la kar diya ya nahi
 
-    let dom = new jsdom.JSDOM(html);       //Creating a dom(Document Object Model)(it is a tree of the html code)(basically makes easy for developers to have direct access over the tags)
-    let document = dom.window.document;    //Now as we've made a dom of the html code, so here we've assigned it to the document variable and with this we can directly access any tag of the html page/code
-    console.log(document.title);           // An example on how we access via the document of the dom(Here we've used the above feature and printed the title of the cricinfo webpage)(It prints --->>> ICC Cricket World Cup - Cricket Schedules, Updates, Results | ESPNcricinfo.com)
-}) 
+    let dom = new jsdom.JSDOM(html);                  //Creating a dom(Document Object Model)(it is a tree of the html code)(basically makes easy for developers to have direct access over the tags)
+    let document = dom.window.document;               //Now as we've made a dom of the html code, so here we've assigned it to the document variable and with this we can directly access any tag of the html page/code
+    // console.log(document.title);                   // An example on how we access via the document of the dom(Here we've used the above feature and printed the title of the cricinfo webpage)(It prints --->>> ICC Cricket World Cup - Cricket Schedules, Updates, Results | ESPNcricinfo.com)
+
+    let matchesKaDivs = document.querySelectorAll("div.match-score-block");          //Now here we've taken all the divs of the matches using querySelectorAll and passing in the arguments as where the code of matches is present (eg here is was in div with calss match-score-block so we passed div.match-score-block)
+    console.log(matchesKaDivs.length);
+})
