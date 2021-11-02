@@ -54,7 +54,7 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
     let document = dom.window.document;               //Now as we've made a dom of the html code, so here we've assigned it to the document variable and with this we can directly access any tag of the html page/code
     // console.log(document.title);                   // An example on how we access via the document of the dom(Here we've used the above feature and printed the title of the cricinfo webpage)(It prints --->>> ICC Cricket World Cup - Cricket Schedules, Updates, Results | ESPNcricinfo.com)
 
-    let matchesKaDivs = document.querySelectorAll("div.match-score-block");          // Now here we've taken all the divs of the matches using querySelectorAll and passing in the arguments as where the code of matches is present (eg here is was in div with calss match-score-block so we passed div.match-score-block)
+    let matchesKaDivs = document.querySelectorAll("div.match-score-block");          // Now here we've taken all the divs of the matches using querySelectorAll and passing in the arguments as where the code of matches is present (eg here it was in div with calss match-score-block so we passed div.match-score-block)
     // console.log(matchesKaDivs.length);                                               // Here we're just testing by printing the length and checking whether the no of matches are showing in the length or not
 
     let matches = [];
@@ -68,7 +68,24 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
             result: ""                   // result of the match 
         };
 
-        let resultPrinting = matchesKaDivs[i].querySelector("div.status-text > span");       // gone inside the website of cricinfo and inspected where the result is kep and bought it's location here in the argument
+
+        let teamParas = matchesKaDivs[i].querySelectorAll("div.name-detail > p.name");               // gone inside the website of cricinfo and inspected where the team names are kept and bought it's location here in the argument
+        match.t1 = teamParas[0].textContent;
+        match.t2 = teamParas[1].textContent;
+
+        let teamScores = matchesKaDivs[i].querySelectorAll("div.score-detail > span.score");          // gone inside the website of cricinfo and inspected where the scores are kept and bought it's location here in the argument
+        if (teamScores.length == 2) {                                          // now since some matches have not been played and even some matches had only one innings and match stopped so we dont have scores for those matches so we used if else (i.e agar length 2 hai tho dono innings hua tha so dono ka score hoga so we do that in if(teamScore.length == 2)) 
+            match.t1s = teamScores[0].textContent;
+            match.t2s = teamScores[1].textContent;
+        } else if (teamScores.length == 1) {                                   // and agar 1 innings hua tho uska score krdo assign and dusre innings ko blank print kardo and lastly 
+            match.t1s = teamScores[0].textContent;
+            match.t2s = "";
+        } else {                                                              // agar match nhi hua tho dono score's ki jagha par blank hi assign kar do so that atleast that blank will be shown and baki tho hamne niche results ko print kiya hi hai tho waha sae match ka status pta chal hi jaiga
+            match.t1s = "";
+            match.t2s = "";
+        }
+
+        let resultPrinting = matchesKaDivs[i].querySelector("div.status-text > span");       // gone inside the website of cricinfo and inspected where the result is kept and bought it's location here in the argument
         match.result = resultPrinting.textContent;                                           // and here assigned the text content of the result to the object's data member named result which is in match object(therefore match.result -->> ki match object ke andar ka result) 
 
 
