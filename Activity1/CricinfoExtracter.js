@@ -44,7 +44,7 @@ let args = minimist(process.argv);
 // console.log(args.dataFolder);
 // console.log(args.excelFile);
 
-// browser => url to html (request to response)
+// browser => url to html (browser ne url sae http request banaya jiske badle me server ne html bhaja in http response)(So this http is just a protocol/way to get the data)
 let responseKaPromise = axios.get(args.source);
 responseKaPromise.then(function(response) {          //Yaha response milega html nahi
     let html = response.data;                  // ab since html us response k data me bhara para hai so yaha hame html mil jaiyega and it'll be assigned to html variable here
