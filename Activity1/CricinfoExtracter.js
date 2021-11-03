@@ -31,13 +31,13 @@
 
 // TU HI NIRANKAR , Let's Start
 
-let minimist = require("minimist");
-let axios = require("axios");
-let jsdom = require("jsdom");
-let excel4node = require("excel4node");
-let pdflib = require("pdf-lib");
-let fs = require("fs");
-let path = require("path");
+let minimist = require("minimist");             //this is required to take/read inputs from command line(like we're giving the source etc, so it'll read all the cmd inputs)
+let axios = require("axios");                   //this is required to download data from web(Web Scrapping basically) 
+let jsdom = require("jsdom");                   //this is used to make the dom of the webpage/html and process the codes/data
+let excel4node = require("excel4node");         //this is used to create the excelfile of the processed data
+let pdflib = require("pdf-lib");                //this is used to create the pdf file of the data 
+let fs = require("fs");                         //basically used to read and write files(here it'll write teams, scores etc in the pdf file)
+let path = require("path");                     //used to give the path(here to give the path of the pdf)
 
 let args = minimist(process.argv);
 // console.log(args.source);           //This was just to check whether hamara arguments sahi sae print hua ki nahi
