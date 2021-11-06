@@ -92,5 +92,11 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
         matches.push(match);   // and here pushing the match object to the matches array 
 
     }
-    console.log(matches);      // now as our data is pushed(i.e currently result is taken and pushed) so we are checking it by printing our matches array 
+    // console.log(matches);      // now as our data is pushed(i.e currently result is taken and pushed) so we are checking it by printing our matches array 
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Now as we already have the JSO(JavaScript Object) so we will convert this JSO to JSON by using (JSON.stringify())
+    // The reason why we convert JSO to JSON is that because we can only do operations in JSO but cannot save or write it in different files, so to write the objects in different file we convert JSO to JSON first then it'll work
+    // Our main moto here is that we can make single single teams and inside it make all the matches played by that team against other teams, basically summing up all the matches to the particular team(ki india k object k andar hum india k sath kon kon si team ne matches khali hai wo dal sake, and same for other teams too)
+    let matchesKaJSON = JSON.stringify(matches);
+    fs.writeFileSync("matches.json", matchesKaJSON, "utf-8");
 })
