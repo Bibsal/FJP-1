@@ -70,7 +70,7 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
 
 
         let teamParas = matchesKaDivs[i].querySelectorAll("div.name-detail > p.name");               // gone inside the website of cricinfo and inspected where the team names are kept and bought it's location here in the argument
-        match.t1 = teamParas[0].textContent;
+        match.t1 = teamParas[0].textContent;                                                         // match object k data member (t1 , t2 (team 1 and team 2)) me kon si team ki match hui thi wahi assign kr rhe hai in dono lineeo me
         match.t2 = teamParas[1].textContent;
 
         let teamScores = matchesKaDivs[i].querySelectorAll("div.score-detail > span.score");          // gone inside the website of cricinfo and inspected where the scores are kept and bought it's location here in the argument
@@ -85,7 +85,7 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
             match.t2s = "";
         }
 
-        let resultPrinting = matchesKaDivs[i].querySelector("div.status-text > span");       // gone inside the website of cricinfo and inspected where the result is kept and bought it's location here in the argument
+        let resultPrinting = matchesKaDivs[i].querySelector("div.status-text > span");       // gone inside the website of cricinfo and inspected where the result is kept and bought it's location here in the argument and since ak match ki sirf ak hi result hogi so we used querySelector and not used querySelectorAll because it would give error
         match.result = resultPrinting.textContent;                                           // and here assigned the text content of the result to the object's data member named result which is in match object(therefore match.result -->> ki match object ke andar ka result) 
 
 
