@@ -96,7 +96,35 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Now as we already have the JSO(JavaScript Object) so we will convert this JSO to JSON by using (JSON.stringify())
     // The reason why we convert JSO to JSON is that because we can only do operations in JSO but cannot save or write it in different files, so to write the objects in different file we convert JSO to JSON first then it'll work
-    // Our main moto here is that we can make single single teams and inside it make all the matches played by that team against other teams, basically summing up all the matches to the particular team(ki india k object k andar hum india k sath kon kon si team ne matches khali hai wo dal sake, and same for other teams too)
     let matchesKaJSON = JSON.stringify(matches);
     fs.writeFileSync("matches.json", matchesKaJSON, "utf-8");
+
+    // Our main moto here is that we can make single single teams and inside it make all the matches played by that team against other teams, basically summing up all the matches to the particular team(ki india k object k andar hum india k sath kon kon si team ne matches khali hai wo dal sake, and same for other teams too)
+    // So for that I'll run a loop and work accordingly by first making a array named teams and loop me we will be calling the function that'll check whether the team are present in the teams array or not
+    let teams = [];
+    for (let i = 0; i < matches.length; i++) {
+        addTeamToTeamsArraIfNotAlreadyThere(teams, matches[i].t1);                 //this line after calling function means ki agar matches ka t1, teams array me nahi hai tho add kardo, and same for the below line too. Because currently teams array is empty and we are creating it to have all the teams differentiated 
+        addTeamToTeamsArraIfNotAlreadyThere(teams, matches[i].t2);
+    }
+
+    let teamsKaJSON = JSON.stringify(teams);       // Creating the JSON for writing a new file
+    fs.writeFileSync("teams.json", teamsKaJSON, "utf-8");        //New file will be created with name teams.json , and inside it will be present the names of the total no of teams, that we've pushed in the below function (the team name and matches object)
 })
+
+function addTeamToTeamsArraIfNotAlreadyThere(teams, teamName) {
+    let tidx = -1;                                    //teamsIndex(teamsArrayKaIndex)
+    // loop k andar, checking ki agar match object ka data member(like currently checking name of team here so that we can make objects for different different teams) teams array me present hai tho update the index(at starting teams array empty hogi so koi index update nhi hogi and will take -1 index for that moment)
+    for (let i = 0; i < teams.length; i++) {
+        if (teams[i].name == teamName) {
+            tidx = i;
+            break;
+        }
+    }
+
+    if(tidx == -1) {
+        teams.push({
+            name: teamName,
+            matches: []
+        })
+    }
+}    
