@@ -107,9 +107,33 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
         addTeamToTeamsArraIfNotAlreadyThere(teams, matches[i].t2);
     }
 
+    for (let i = 0; i < matches.length; i++) {
+        addMatchToSpecificTeam(teams, matches[i].t1, matches[i].t2, matches[i].t1s, matches[i].t2s, matches[i].result);       // we're calling this function taki jis team ka match hua hai wo proper us team k object me chale jai
+        addMatchToSpecificTeam(teams, matches[i].t2, matches[i].t1, matches[i].t2s, matches[i].t1s, matches[i].result);       // we're calling this function taki upar tho straight aaur directly hamne us team ko uske object me dal diya but dusra team(opponentTeam) jiske sath match hua tha wo is line ki madad sae apne team k object me chala jaiga
+    }
+
     let teamsKaJSON = JSON.stringify(teams);       // Creating the JSON for writing a new file
     fs.writeFileSync("teams.json", teamsKaJSON, "utf-8");        //New file will be created with name teams.json , and inside it will be present the names of the total no of teams, that we've pushed in the below function (the team name and matches object)
 })
+
+function addMatchToSpecificTeam(teams, homeTeam, oppTeam, ourScore, theirScore, result) {              // We're making this function because we have to fill the matches object inside teams.json file, so we're passing the (teams array , then our homeTeam , then the opponentTeam , then ourScore, then theirScore, and lastly the results)
+    let tidx = -1;
+    for (let i = 0; i < teams.length; i++) {
+        if (teams[i].name == homeTeam) {         //(now if the team in teams array is equal to the homeTeam so it'll go to particular team(according to the team name) and then the teamIndex will be assigned to i)
+            tidx = i;
+            break;
+        }
+    }
+
+    let team = teams[tidx];           // now jis v index par jo team ko rakha hua hai usi index pe ham matches object ka data members banaynge(vs, selfscore, oppScore, result) so these data members will be made in matches object
+    team.matches.push({
+        vs: oppTeam,
+        selfscore: ourScore,
+        oppScore: theirScore,
+        result: result
+    })
+}
+
 
 function addTeamToTeamsArraIfNotAlreadyThere(teams, teamName) {
     let tidx = -1;                                    //teamsIndex(teamsArrayKaIndex)
@@ -121,7 +145,7 @@ function addTeamToTeamsArraIfNotAlreadyThere(teams, teamName) {
         }
     }
 
-    if(tidx == -1) {
+    if (tidx == -1) {
         teams.push({
             name: teamName,
             matches: []
