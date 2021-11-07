@@ -118,8 +118,30 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     prepareExcel(teams, args.excelFile);                     // We are calling a function to prepare Excel Sheet for our Teams
+    prepareFoldersAndPDFs(teams, args.dataFolder);           // We are calling a function to prepare Folders and inside it pdfs for our Teams
 
 })
+
+function prepareFoldersAndPDFs(teams, dataFolder) {           // function to create folders and pdfs
+    if(fs.existsSync(dataFolder) == false) {                  // here we're checking ki agar phle v yaha worldcup folder (jo ham bana rahe hai) pehle sae pari hai tho mat banana, warna agar nahi pari tho banana
+        fs.mkdirSync(dataFolder);                             // this is the way we create folder (i.e filesystem library dot makedirectory mkdir(folder name jo runtime me pass karnge))
+    }
+
+    for(let i = 0; i < teams.length; i++) {                   // now inside the folders we're creating folders for each team using the teams array dot its team name(so team name kae according )
+        let teamKaFolderName = path.join(dataFolder, teams[i].name);
+        if(fs.existsSync(teamKaFolderName) == false) {
+            fs.mkdirSync(teamKaFolderName);
+        }
+    }
+
+    for(let i = 0; i < teams.length; i++) {                              //creating pdfs for all matches of single single teams, inside all the teams folder
+        let teamKaFolderName = path.join(dataFolder, teams[i].name);
+        if(fs.existsSync(teamKaFolderName) == false) {
+            fs.mkdirSync(teamKaFolderName);
+        }
+    }
+}
+
 
 function prepareExcel(teams, excelFileNameJoHamneFunctionCallingMeDiyaHai) {                //Function To Prepare Excel Sheet For Our Teams array with different teams
     let wb = new excel4node.Workbook();                                               // This is the way we create a workbook(a file)using our new keyword [new libraryname.Workbook() ] function
@@ -134,7 +156,7 @@ function prepareExcel(teams, excelFileNameJoHamneFunctionCallingMeDiyaHai) {    
         teamsKaSheet.cell(1, 4).string("Result");
         for(let j = 0; j < teams[i].matches.length; j++) {
             teamsKaSheet.cell(2 + j, 1).string(teams[i].matches[j].vs);               //Here we are creating cells from 2nd row and we're inputting the values of the vs, selfscore, oppscore, result from teamsarrayKiAkAkteam dot matchesArraykAndar(matches.json)
-            teamsKaSheet.cell(2 + j, 2).string(teams[i].matches[j].selfscore);
+            teamsKaSheet.cell(2 + j, 2).string(teams[i].matches[j].selfscore);        // 2 + j matlab 2nd row ki j (matlab 0th cell, phir 1st cell, phir 2nd etc etc) because 1st row occupied hogi so 2nd row onwards ham fill krnge
             teamsKaSheet.cell(2 + j, 3).string(teams[i].matches[j].oppScore);
             teamsKaSheet.cell(2 + j, 4).string(teams[i].matches[j].result);
         }
