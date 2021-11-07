@@ -117,12 +117,12 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    prepareExcel(teams, args.excel);                     // We are calling a function to prepare Excel Sheet for our Teams
+    prepareExcel(teams, args.excelFile);                     // We are calling a function to prepare Excel Sheet for our Teams
 
 })
 
 function prepareExcel(teams, excelFileNameJoHamneFunctionCallingMeDiyaHai) {                //Function To Prepare Excel Sheet For Our Teams array with different teams
-    let wb = excel4node.Workbook();                                               // This is the way we create a workbook(a file)using our [ libraryname.Workbook() ] function
+    let wb = new excel4node.Workbook();                                               // This is the way we create a workbook(a file)using our new keyword [new libraryname.Workbook() ] function
 
     for (let i = 0; i < teams.length; i++) {                                      // Putting loops taki sabhi teams k liye traverse kar k sabhi k liye sheet ban jaigi
         let teamsKaSheet = wb.addWorksheet(teams[i].name);                        // Creating sheet(different page in excel file for different team) with teams array k team ka name...Sheets are created using [ wb(jo ki upar assign kiya hua tha).addWorksheet(kis name sae banana hai)  ]
