@@ -114,7 +114,23 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
 
     let teamsKaJSON = JSON.stringify(teams);       // Creating the JSON for writing a new file
     fs.writeFileSync("teams.json", teamsKaJSON, "utf-8");        //New file will be created with name teams.json , and inside it will be present the names of the total no of teams, that we've pushed in the below function (the team name and matches object)
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    prepareExcel(teams, args.excel);                     // We are calling a function to prepare Excel Sheet for our Teams
+
 })
+
+function prepareExcel(teams, excelFileNameJoHamneFunctionCallingMeDiyaHai) {                //Function To Prepare Excel Sheet For Our Teams array with different teams
+    let wb = excel4node.Workbook();                                               // This is the way we create a workbook(a file)using our [ libraryname.Workbook() ] function
+
+    for (let i = 0; i < teams.length; i++) {                                      // Putting loops taki sabhi teams k liye traverse kar k sabhi k liye sheet ban jaigi
+        let teamsKaSheet = wb.addWorksheet(teams[i].name);                        // Creating sheet(different page in excel file for different team) with teams array k team ka name...Sheets are created using [ wb(jo ki upar assign kiya hua tha).addWorksheet(kis name sae banana hai)  ]
+
+    }
+
+    wb.write(excelFileNameJoHamneFunctionCallingMeDiyaHai);                        // This will write in the updates in excelFile(isiliye argument me filename pass kiye hai)
+}
 
 function addMatchToSpecificTeam(teams, homeTeam, oppTeam, ourScore, theirScore, result) {              // We're making this function because we have to fill the matches object inside teams.json file, so we're passing the (teams array , then our homeTeam , then the opponentTeam , then ourScore, then theirScore, and lastly the results)
     let tidx = -1;
