@@ -127,6 +127,17 @@ function prepareExcel(teams, excelFileNameJoHamneFunctionCallingMeDiyaHai) {    
     for (let i = 0; i < teams.length; i++) {                                      // Putting loops taki sabhi teams k liye traverse kar k sabhi k liye sheet ban jaigi
         let teamsKaSheet = wb.addWorksheet(teams[i].name);                        // Creating sheet(different page in excel file for different team) with teams array k team ka name...Sheets are created using [ wb(jo ki upar assign kiya hua tha).addWorksheet(kis name sae banana hai)  ]
 
+        //Now we will fill the cells of the excelSheet(1st row me likhnge vs,selfScore,Opp Score, Result, and phir 2nd row sae sari teams k liye inko fill kar dnge, will run loop accordingly)
+        teamsKaSheet.cell(1, 1).string("Vs");          //the sheet name dot cell (and row number diya hai like 1, 1 means ki 1st row ki 1st cell me Vs likho, 1,2 means 1st row ki 2nd cell me Self Score likho etc)
+        teamsKaSheet.cell(1, 2).string("Self Score");
+        teamsKaSheet.cell(1, 3).string("Opp Score");
+        teamsKaSheet.cell(1, 4).string("Result");
+        for(let j = 0; j < teams[i].matches.length; j++) {
+            teamsKaSheet.cell(2 + j, 1).string(teams[i].matches[j].vs);               //Here we are creating cells from 2nd row and we're inputting the values of the vs, selfscore, oppscore, result from teamsarrayKiAkAkteam dot matchesArraykAndar(matches.json)
+            teamsKaSheet.cell(2 + j, 2).string(teams[i].matches[j].selfscore);
+            teamsKaSheet.cell(2 + j, 3).string(teams[i].matches[j].oppScore);
+            teamsKaSheet.cell(2 + j, 4).string(teams[i].matches[j].result);
+        }
     }
 
     wb.write(excelFileNameJoHamneFunctionCallingMeDiyaHai);                        // This will write in the updates in excelFile(isiliye argument me filename pass kiye hai)
