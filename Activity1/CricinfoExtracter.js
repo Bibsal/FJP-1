@@ -132,16 +132,18 @@ function prepareFoldersAndPDFs(teams, dataFolder) {           // function to cre
         if(fs.existsSync(teamKaFolderName) == false) {
             fs.mkdirSync(teamKaFolderName);
         }
-    }
 
-    for(let i = 0; i < teams.length; i++) {                              //creating pdfs for all matches of single single teams, inside all the teams folder
-        let teamKaFolderName = path.join(dataFolder, teams[i].name);
-        if(fs.existsSync(teamKaFolderName) == false) {
-            fs.mkdirSync(teamKaFolderName);
+        for(let j = 0; j < teams[i].matches.length; j++) {                              //creating pdfs for all matches of single single teams, inside all the teams folder
+            let match = teams[i].matches[j];
+            createMatchScorecardPDF(teamKaFolderName, match);
         }
-    }
+    }  
 }
 
+function createMatchScorecardPDF(teamKaFolderName, match) {
+    let matchFileName = path.join(teamKaFolderName, match.vs + ".pdf");
+    // fs.writeFileSync(matchFileName, "" , "utf-8");
+}
 
 function prepareExcel(teams, excelFileNameJoHamneFunctionCallingMeDiyaHai) {                //Function To Prepare Excel Sheet For Our Teams array with different teams
     let wb = new excel4node.Workbook();                                               // This is the way we create a workbook(a file)using our new keyword [new libraryname.Workbook() ] function
