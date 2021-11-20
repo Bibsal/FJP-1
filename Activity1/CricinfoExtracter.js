@@ -37,7 +37,7 @@ let jsdom = require("jsdom");                   //this is used to make the dom o
 let excel4node = require("excel4node");         //this is used to create the excelfile of the processed data
 let pdflib = require("pdf-lib");                //this is used to create the pdf file of the data 
 let fs = require("fs");                         //basically used to read and write files(here it'll write teams, scores etc in the pdf file)
-let path = require("path");                     //used to give the path(here to give the path of the pdf)
+let path = require("path");                     //used to give the path(here to give the path of the pdf,like in your local disk where have you created the pdf files etc)
 
 let args = minimist(process.argv);
 // console.log(args.source);           //This was just to check whether hamara arguments sahi sae print hua ki nahi
@@ -123,21 +123,21 @@ responseKaPromise.then(function (response) {          //Yaha response milega, ht
 })
 
 function prepareFoldersAndPDFs(teams, dataFolder) {           // function to create folders and pdfs
-    if(fs.existsSync(dataFolder) == false) {                  // here we're checking ki agar phle v yaha worldcup folder (jo ham bana rahe hai) pehle sae pari hai tho mat banana, warna agar nahi pari tho banana
+    if (fs.existsSync(dataFolder) == false) {                  // here we're checking ki agar phle v yaha worldcup folder (jo ham bana rahe hai) pehle sae pari hai tho mat banana, warna agar nahi pari tho banana
         fs.mkdirSync(dataFolder);                             // this is the way we create folder (i.e filesystem library dot makedirectory mkdir(folder name jo runtime me pass karnge))
     }
 
-    for(let i = 0; i < teams.length; i++) {                   // now inside the folders we're creating folders for each team using the teams array dot its team name(so team name kae according )
+    for (let i = 0; i < teams.length; i++) {                   // now inside the folders we're creating folders for each team using the teams array dot its team name(so team name kae according )
         let teamKaFolderName = path.join(dataFolder, teams[i].name);
-        if(fs.existsSync(teamKaFolderName) == false) {
+        if (fs.existsSync(teamKaFolderName) == false) {
             fs.mkdirSync(teamKaFolderName);
         }
 
-        for(let j = 0; j < teams[i].matches.length; j++) {                              //creating pdfs for all matches of single single teams, inside all the teams folder
+        for (let j = 0; j < teams[i].matches.length; j++) {                              //creating pdfs for all matches of single single teams, inside all the teams folder
             let match = teams[i].matches[j];
             createMatchScorecardPDF(teamKaFolderName, match);
         }
-    }  
+    }
 }
 
 function createMatchScorecardPDF(teamKaFolderName, match) {
@@ -156,7 +156,7 @@ function prepareExcel(teams, excelFileNameJoHamneFunctionCallingMeDiyaHai) {    
         teamsKaSheet.cell(1, 2).string("Self Score");
         teamsKaSheet.cell(1, 3).string("Opp Score");
         teamsKaSheet.cell(1, 4).string("Result");
-        for(let j = 0; j < teams[i].matches.length; j++) {
+        for (let j = 0; j < teams[i].matches.length; j++) {
             teamsKaSheet.cell(2 + j, 1).string(teams[i].matches[j].vs);               //Here we are creating cells from 2nd row and we're inputting the values of the vs, selfscore, oppscore, result from teamsarrayKiAkAkteam dot matchesArraykAndar(matches.json)
             teamsKaSheet.cell(2 + j, 2).string(teams[i].matches[j].selfscore);        // 2 + j matlab 2nd row ki j (matlab 0th cell, phir 1st cell, phir 2nd etc etc) because 1st row occupied hogi so 2nd row onwards ham fill krnge
             teamsKaSheet.cell(2 + j, 3).string(teams[i].matches[j].oppScore);
@@ -202,4 +202,4 @@ function addTeamToTeamsArraIfNotAlreadyThere(teams, teamName) {
             matches: []
         })
     }
-}    
+}
