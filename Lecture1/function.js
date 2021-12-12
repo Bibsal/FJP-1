@@ -4,7 +4,7 @@ function sayHi(param) {
     console.log("Hello from sayHi")
     console.log("param received", param);
     let rval = Math.random();
-    return rval;
+    return "returned "+ rval;
 }
 
 // function call
