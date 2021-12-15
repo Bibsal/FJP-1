@@ -4,7 +4,7 @@
 
 let arr = [10, 20, 30, 40, 50];
 let na1 = arr.slice(1, 4); // from 1 to 3 (4 not included)
-displayArray(na1); 
+displayArray(na1);
 
 let na2 = arr.slice(1); // from 1 to end
 displayArray(na2);
@@ -42,14 +42,14 @@ scopy[0].age = 110;
 displayObjectArray(anarr);
 displayObjectArray(scopy);
 
-function displayArray(arr){
+function displayArray(arr) {
     console.log(arr + " = " + arr.length);
 }
-function displayObjectArray(arr){
-    let str = "";
-
-    for(let i = 0; i < arr.length; i++){
-        str += arr[i].age + ", ";    
+function displayObjectArray(arr) {
+    let str = "";             // Now as I want to print the values of objects in a single line so we cannot do that with console.log directly as console.log prints in different lines
+    // so for printing our object values in same line I've made a empty string and below in loop I've added all the values to the same string, by which we get our decired output i.e printing all the object value in same line.
+    for (let i = 0; i < arr.length; i++) {
+        str += arr[i].age + ", ";
     }
 
     console.log(str + ".");
