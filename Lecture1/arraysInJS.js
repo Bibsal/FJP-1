@@ -46,3 +46,17 @@ console.log(array);
 // Intersion using splice
 array.splice(2, 0, "Bishal", "Prasad", "Keshri");
 console.log(array);
+
+
+// indexOf :- (method) Array<number>.indexOf(searchElement: number, fromIndex?: number): number
+/*Returns the index of the first occurrence of a value in an array, or -1 if it is not present.
+
+@param searchElement — The value to locate in the array.
+
+@param fromIndex — The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
+*/
+let yahamila = array.indexOf("bishal",0);   
+console.log(yahamila);   // here it'll print -1 as it wont get any bishal like this(bishal) while travelling/searching for the index of the value that is passed in the parameter, so it prints -1
+let yahamila = array.indexOf("Bishal",0);
+console.log(yahamila);   // here it'll print 2 as it'll start searching from 0 as passed in the parameter and at index 2 it'll get Bishal present there so it'll give us that index i.e 2 here
+
