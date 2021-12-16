@@ -53,5 +53,34 @@ let arr = [
     }
 ];
 
-let newArray = arr.filter(f => f.gender == "F").map(f => f.age >= 20 && f.age <= 30);
-console.log(newArray)
+/*
+// One way of doing is by filter function
+// let newArray = arr.filter(f => f.gender == "F").map(f => f.age >= 20 && f.age <= 30);
+*/
+
+/*
+// Another way to do it
+// let newArray1 = arr.map(function(v, i, oarr) {
+//     if(v.gender == "F" && v.age >= 20 && v.age <= 30) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+// })
+// console.log(newArray1);
+*/
+
+/*
+// Another Way To Do The Same Problem 
+// let newArray = arr.map(v => 
+//     { 
+//         return v.gender == "F" && v.age >= 20 && v.age <= 30 
+//     });
+// console.log(newArray)
+*/
+
+/*
+// Another way of doing the same problem
+let anotherWay = arr.map(v => v.gender == 'F' && v.age >= 20 && v.age <= 30);
+console.log(anotherWay);
+*/
