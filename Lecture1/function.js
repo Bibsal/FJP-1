@@ -1,8 +1,8 @@
 // Non primitive -> array, objects, function
 // function definition
-function sayHi(param) {
+function sayHi(parameterJobhiTypeKaPassKarSakteHaiJSmae) {
     console.log("Hello from sayHi")
-    console.log("param received", param);
+    console.log("param received", parameterJobhiTypeKaPassKarSakteHaiJSmae);
     let rval = Math.random();
     return "returned "+ rval;
 }
