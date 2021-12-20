@@ -1,3 +1,5 @@
+// flatten the 2d array
+
 let arr2d = [[2, 8, 10], [34], [45, 31, 25, 64, 72, 88], [], [25, 72]];
 
 let breaking2dArray = arr2d.reduce(function(pv, cv, ci, oarr) {
