@@ -8,6 +8,13 @@ let breaking2dArray = arr2d.reduce(function(pv, cv, ci, oarr) {
 }, []);
 
 console.log(breaking2dArray);
+let a = "bishal";
+let b = "diksha";
+
+let c = a.concat(b);
+console.log(c);
+// agarwal.deeksha498@gmail.com
+
 
 // Output :-  [2, 8, 10, 34, 45, 31, 25, 64, 72, 88, 25, 72]
 
