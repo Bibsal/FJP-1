@@ -10,7 +10,7 @@
 // extract information using jsdom, now
 // convert matches to teams, then 
 // save teams to excel using excel4node, and at last
-// create folders and save pdf using pdf-lib
+// create folders using fs and inside it save pdf using pdf-lib
 
 //---------------------------------------------------------------------------------------------------------------
 
