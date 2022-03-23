@@ -1,3 +1,9 @@
+// Overview :- A JavaScript focusedproject , using node libraries like "excel4node" and "pdf-lib" to save extracted data in excel and pdf format. 
+// Getting match (HTML) data from crickinfo.com and saving it into JSON format . Then using this JSON to build excel sheets of each team and adding its match details 
+// in respective sheet using library "excel4node" and similarly saving each teams match details (in team folder) in pdf format using library "pdf-lib".
+
+// --------------------------------------------------------------------------------------------------------------
+
 // 1.1 Read data from a source : cricinfo worldcup 2019 (axios)
 // 1.2 Process data : Get all teams (jsdom)
 // 1.3 Write processed data in excel : Match results per team in their own sheet (excel4node)
